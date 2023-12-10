@@ -20,7 +20,7 @@ on:
         description: '修改默认WIFI名'
         required: true
         default: 'Mediatek'
-      USE_MTWIFI_CFG_LUCI:
+      USE_MTWIFI_CFG:
         description: '原生无线界面 luci-mtwifi-cfg'
         required: true
         default: true
@@ -68,7 +68,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        echo "USE_MTWIFI_CFG_LUCI=${{ github.event.inputs.USE_MTWIFI_CFG_LUCI }}" >> $GITHUB_ENV
+        echo "USE_MTWIFI_CFG=${{ github.event.inputs.USE_MTWIFI_CFG }}" >> $GITHUB_ENV
         echo "USE_NX30PRO_EEPROM=${{ github.event.inputs.USE_NX30PRO_EEPROM }}" >> $GITHUB_ENV
         echo "USE_52MHZ=${{ github.event.inputs.USE_52MHZ }}" >> $GITHUB_ENV
         echo "USE_MEMORY_SHRINK=${{ github.event.inputs.USE_MEMORY_SHRINK }}" >> $GITHUB_ENV
