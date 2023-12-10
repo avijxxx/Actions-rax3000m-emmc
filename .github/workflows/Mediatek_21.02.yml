@@ -108,28 +108,17 @@ jobs:
 
     - name: 导入补丁和配置
       run: |
-        if [ $USE_MTWIFI_CFG = "false" ] ; then 
-          [ -e files ] && mv files openwrt/files
-          cp patches/*.patch openwrt
-          cd openwrt
-          rm -rf ./tmp* ./.config*
-          cat defconfig/mt7981-ax3000.config $GITHUB_WORKSPACE/configs/Mediatek_21.02.config >> .config              
-          #git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          #git config --global user.name "github-actions[bot]"
-          #git am *.patch
-        fi
+        [ -e files ] && mv files openwrt/files
+        cd openwrt
+        rm -rf ./tmp* ./.config*
+        cat defconfig/mt7981-ax3000.config $GITHUB_WORKSPACE/configs/Mediatek_21.02.config >> .config
         
     - name: 设置无线控制界面样式
       if: env.USE_MTWIFI_CFG == 'true'
       run: |
-        [ -e files ] && mv files openwrt/files
-        cp patches/*.patch openwrt
         cd openwrt
         rm -rf ./tmp* ./.config*
         cat defconfig/mt7981-ax3000-mtwifi-cfg.config $GITHUB_WORKSPACE/configs/Mediatek_21.02.config >> .config              
-        #git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        #git config --global user.name "github-actions[bot]"
-        #git am *.patch
 
     - name: 设置是否使用 nx30pro eeprom
       if: env.USE_NX30PRO_EEPROM == 'true'
