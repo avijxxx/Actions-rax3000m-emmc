@@ -10,6 +10,10 @@ if [[ $REPO_URL == *"immortalwrt-mt798x"* ]] ; then
   #更新golang
   rm -rf feeds/packages/lang/golang
   git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
+  #闪存频率_26MHZ修复
+  if [[ $USE_52MHZ == "false" ]] ; then
+     sed -i -e '/bus-width = <8>;/ a\    cap-mmc-highspeed;' target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-cmcc-rax3000m-emmc.dts         
+  fi
   #修改默认WIFI名
   if [[ $MODIFY_WIFI == "true" ]] ; then
       WIFI_FILE="./package/mtk/applications/mtwifi-cfg/files/mtwifi.sh"
@@ -24,4 +28,3 @@ if [[ $REPO_URL == *"immortalwrt-mt798x"* ]] ; then
       sed -i '/CONFIG_MTK_MEMORY_SHRINK/d' $MTWIFI_CONFIG
   fi
 fi
-
